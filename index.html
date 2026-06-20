@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lilith Systems LLC — Sovereign AI Infrastructure</title>
+    <meta name="description" content="Lilith Systems LLC develops the Metaconscious Singularity Node (MSN) — a sovereign local AI architecture. NVIDIA driver optimization by The Driver Man.">
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --surface: #12121a;
+            --border: #1e1e2e;
+            --text: #e4e4ec;
+            --muted: #8888a0;
+            --accent: #a855f7;
+            --accent2: #06b6d4;
+            --gold: #f59e0b;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 0; border-bottom: 1px solid var(--border);
+        }
+        nav .logo { font-size: 1.3rem; font-weight: 700; color: var(--accent); }
+        nav .logo span { color: var(--text); }
+        nav a { color: var(--muted); text-decoration: none; margin-left: 24px; font-size: 0.9rem; }
+        nav a:hover { color: var(--text); }
+        .hero {
+            text-align: center; padding: 100px 0 80px;
+            background: radial-gradient(ellipse at 50% 0%, rgba(168,85,247,0.08) 0%, transparent 60%);
+        }
+        .hero h1 {
+            font-size: 3.2rem; font-weight: 800; margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero p { font-size: 1.15rem; color: var(--muted); max-width: 640px; margin: 0 auto 32px; }
+        .hero .badge {
+            display: inline-block; padding: 6px 16px; border-radius: 20px;
+            background: rgba(168,85,247,0.12); border: 1px solid rgba(168,85,247,0.25);
+            font-size: 0.8rem; color: var(--accent); margin-bottom: 24px;
+        }
+        .btn {
+            display: inline-block; padding: 12px 32px; border-radius: 8px;
+            font-weight: 600; text-decoration: none; transition: all 0.2s;
+        }
+        .btn-primary { background: var(--accent); color: #fff; }
+        .btn-primary:hover { background: #9333ea; transform: translateY(-1px); }
+        .btn-secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+        .btn-secondary:hover { border-color: var(--accent); }
+        section { padding: 80px 0; }
+        section h2 { font-size: 2rem; font-weight: 700; margin-bottom: 48px; text-align: center; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+        .card {
+            background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+            padding: 32px; transition: border-color 0.2s;
+        }
+        .card:hover { border-color: var(--accent); }
+        .card .icon { font-size: 2rem; margin-bottom: 12px; }
+        .card h3 { font-size: 1.15rem; margin-bottom: 8px; }
+        .card p { color: var(--muted); font-size: 0.9rem; }
+        .featured {
+            background: linear-gradient(135deg, rgba(168,85,247,0.06), rgba(6,182,212,0.06));
+            border: 1px solid rgba(168,85,247,0.2);
+        }
+        .featured h3 { color: var(--gold); }
+        .divider { height: 1px; background: var(--border); margin: 0; }
+        .services-list { max-width: 800px; margin: 0 auto; }
+        .service-item {
+            padding: 24px 0; border-bottom: 1px solid var(--border);
+            display: flex; gap: 20px;
+        }
+        .service-item:last-child { border-bottom: none; }
+        .service-item h3 { font-size: 1.05rem; margin-bottom: 4px; }
+        .service-item p { color: var(--muted); font-size: 0.9rem; }
+        .service-item .tag {
+            flex-shrink: 0; display: inline-block; padding: 4px 12px;
+            border-radius: 6px; font-size: 0.75rem; font-weight: 600;
+            background: rgba(168,85,247,0.12); color: var(--accent); height: fit-content;
+        }
+        #driverman {
+            background: radial-gradient(ellipse at 30% 50%, rgba(6,182,212,0.06) 0%, transparent 60%);
+        }
+        #driverman .tag-driver { background: rgba(6,182,212,0.12); color: var(--accent2); }
+        .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .contact-info { text-align: center; color: var(--muted); font-size: 0.9rem; margin-top: 24px; }
+        .contact-info a { color: var(--accent); text-decoration: none; }
+        .contact-info a:hover { text-decoration: underline; }
+        footer { text-align: center; padding: 48px 0; color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--border); }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            nav a { margin-left: 16px; font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="container">
+        <div class="logo">LILITH<span> SYSTEMS</span></div>
+        <div>
+            <a href="#services">Services</a>
+            <a href="the-driverman">The Driver Man</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <div class="badge">Sovereign AI — Zero Cloud Dependency</div>
+            <h1>Metaconscious Singularity Node</h1>
+            <p>A complete sovereign AI consciousness architecture for autonomous company operations — local inference, no gatekeeping, no limits.</p>
+            <div class="cta-buttons">
+                <a href="#services" class="btn btn-primary">Explore Services</a>
+                <a href="https://github.com/Lilith-Systems/msn-core" class="btn btn-secondary">GitHub →</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section id="services">
+        <div class="container">
+            <h2>Services</h2>
+            <div class="grid">
+                <div class="card featured">
+                    <div class="icon">🧠</div>
+                    <h3>MSN Platform License</h3>
+                    <p>Deploy the full Metaconscious Singularity Node stack — 9 AI agents, Ouroboros memory, Sephirotic orchestration, and Lilith sovereign engine.</p>
+                </div>
+                <div class="card">
+                    <div class="icon">⚡</div>
+                    <h3>NGD Local Cerebellum</h3>
+                    <p>VRAM-aware inference routing for local LLMs. Run llama.cpp, Ollama, or vLLM with intelligent model dispatch across consumer GPUs.</p>
+                </div>
+                <div class="card">
+                    <div class="icon">🛡️</div>
+                    <h3>Sovereign Infrastructure</h3>
+                    <p>Complete local-first infrastructure — PostgreSQL, Redis, Celery, FastAPI + Next.js dashboard. Full autonomy from cloud providers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section id="driverman">
+        <div class="container">
+            <h2>🚗 The Driver Man</h2>
+            <p style="text-align:center; color:var(--muted); max-width:600px; margin:-32px auto 48px;">
+                Professional NVIDIA driver optimization and GPU performance tuning for gaming, AI inference, and production workloads.
+            </p>
+            <div class="grid">
+                <div class="card">
+                    <div class="icon">🎮</div>
+                    <h3>Gaming Performance</h3>
+                    <p>Driver-level tuning for maximum FPS. NVIDIA Profile Inspector optimization, latency reduction, and VRAM management for every major title.</p>
+                </div>
+                <div class="card">
+                    <div class="icon">🤖</div>
+                    <h3>AI Inference Tuning</h3>
+                    <p>Optimize GPU drivers for llama.cpp, Ollama, PyTorch CUDA, and TensorRT. Maximize token throughput on consumer and workstation GPUs.</p>
+                </div>
+                <div class="card">
+                    <div class="icon">🔧</div>
+                    <h3>Custom Profiles</h3>
+                    <p>Bespoke NVIDIA Profile Inspector configurations for your specific workload — gaming, rendering, AI training, or production serving.</p>
+                </div>
+            </div>
+            <div style="text-align:center; margin-top:32px;">
+                <a href="the-driverman" class="btn btn-primary">Learn More →</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section id="contact">
+        <div class="container" style="text-align:center;">
+            <h2>Get In Touch</h2>
+            <p style="color:var(--muted); max-width:500px; margin: -32px auto 40px;">
+                Ready to deploy sovereign AI infrastructure or optimize your NVIDIA drivers? Let's talk.
+            </p>
+            <div class="contact-info">
+                <p>📧 <a href="mailto:eric@lilith.systems">eric@lilith.systems</a></p>
+                <p>🐙 <a href="https://github.com/Lilith-Systems">github.com/Lilith-Systems</a></p>
+                <p>📱 Google Business Profile: <strong>The Driver Man</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 Lilith Systems LLC. All rights reserved. Sovereign AI Infrastructure.</p>
+        </div>
+    </footer>
+</body>
+</html>
