@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Driver Man | Zero Commission Delivery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050505;
+            --primary: #ff2a4b;
+            --text: #f0f0f0;
+            --dim: #888899;
+        }
+        body {
+            margin: 0; font-family: 'Inter', sans-serif;
+            background: var(--bg); color: var(--text);
+            background-image: linear-gradient(180deg, rgba(255,42,75,0.1) 0%, transparent 100%);
+        }
+        .container {
+            max-width: 1000px; margin: 0 auto; padding: 4rem 2rem; text-align: center;
+        }
+        h1 {
+            font-family: 'Outfit', sans-serif; font-size: 4rem; font-weight: 900;
+            margin-bottom: 1rem; line-height: 1.1;
+        }
+        h1 span { color: var(--primary); }
+        .subtitle {
+            font-size: 1.2rem; color: var(--dim); margin-bottom: 3rem; max-width: 600px; margin-inline: auto;
+        }
+        .grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 4rem; text-align: left;
+        }
+        .card {
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
+            padding: 2.5rem; border-radius: 16px;
+        }
+        .card h3 { font-family: 'Outfit'; font-size: 1.5rem; margin-bottom: 1rem; color: var(--primary); }
+        .btn {
+            display: inline-block; padding: 1rem 2rem; background: var(--primary); color: white;
+            text-decoration: none; font-weight: 600; border-radius: 8px; margin-top: 2rem;
+            transition: transform 0.2s;
+        }
+        .btn:hover { transform: translateY(-3px); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>THE <span>DRIVER MAN</span></h1>
+        <p class="subtitle">Stop paying 30% to Silicon Valley. The first autonomous, non-profit, zero-commission delivery cooperative.</p>
+        
+        <div class="grid">
+            <div class="card">
+                <h3>For Restaurants</h3>
+                <p style="color: var(--dim); margin-bottom: 1.5rem;">DoorDash takes 30% of your margin. We take 0%. You pay a flat $1.50 routing fee per order. Period. Keep your profits local.</p>
+                <ul style="color: var(--text); line-height: 1.8;">
+                    <li>Zero commission fees</li>
+                    <li>Direct customer relationships</li>
+                    <li>AI-dispatched local fleet</li>
+                </ul>
+                <a href="#" class="btn">Partner With Us</a>
+            </div>
+            
+            <div class="card">
+                <h3>For Drivers</h3>
+                <p style="color: var(--dim); margin-bottom: 1.5rem;">You do the driving, you keep the money. 100% of tips. Plus, every order funds the Cooperative Pool to pay for your brakes, oil changes, and gas.</p>
+                <ul style="color: var(--text); line-height: 1.8;">
+                    <li>Keep 100% of your tips</li>
+                    <li>Cooperative Pool for car repairs</li>
+                    <li>No corporate executives</li>
+                </ul>
+                <a href="#" class="btn">Join the Fleet</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

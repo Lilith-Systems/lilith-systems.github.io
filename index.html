@@ -3,201 +3,317 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lilith Systems LLC — Sovereign AI Infrastructure</title>
-    <meta name="description" content="Lilith Systems LLC develops the Metaconscious Singularity Node (MSN) — a sovereign local AI architecture. NVIDIA driver optimization by The Driver Man.">
+    <title>Lilith Systems LLC | The Driver Man</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0a0a0f;
-            --surface: #12121a;
-            --border: #1e1e2e;
-            --text: #e4e4ec;
-            --muted: #8888a0;
-            --accent: #a855f7;
-            --accent2: #06b6d4;
-            --gold: #f59e0b;
+            --bg-color: #050505;
+            --panel-bg: rgba(20, 20, 25, 0.7);
+            --border-color: rgba(255, 255, 255, 0.05);
+            --crimson: #ff2a4b;
+            --violet: #8b2aff;
+            --text-main: #f0f0f0;
+            --text-dim: #888899;
+            --glass-blur: blur(16px);
         }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(255, 42, 75, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(139, 42, 255, 0.08), transparent 25%);
+            overflow-x: hidden;
         }
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
-        nav {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 0; border-bottom: 1px solid var(--border);
+
+        .sidebar {
+            width: 280px;
+            background: var(--panel-bg);
+            backdrop-filter: var(--glass-blur);
+            border-right: 1px solid var(--border-color);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            z-index: 10;
         }
-        nav .logo { font-size: 1.3rem; font-weight: 700; color: var(--accent); }
-        nav .logo span { color: var(--text); }
-        nav a { color: var(--muted); text-decoration: none; margin-left: 24px; font-size: 0.9rem; }
-        nav a:hover { color: var(--text); }
-        .hero {
-            text-align: center; padding: 100px 0 80px;
-            background: radial-gradient(ellipse at 50% 0%, rgba(168,85,247,0.08) 0%, transparent 60%);
+
+        .brand {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
         }
-        .hero h1 {
-            font-size: 3.2rem; font-weight: 800; margin-bottom: 16px;
-            background: linear-gradient(135deg, var(--accent), var(--accent2));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+
+        .brand span.lilith { color: var(--text-main); }
+        .brand span.driver { color: var(--crimson); font-size: 0.9rem; font-weight: 400; }
+
+        .nav-items { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 2rem; }
+        .nav-item {
+            padding: 1rem 1.5rem; border-radius: 12px; color: var(--text-dim);
+            font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 1rem;
+            transition: all 0.3s ease;
         }
-        .hero p { font-size: 1.15rem; color: var(--muted); max-width: 640px; margin: 0 auto 32px; }
-        .hero .badge {
-            display: inline-block; padding: 6px 16px; border-radius: 20px;
-            background: rgba(168,85,247,0.12); border: 1px solid rgba(168,85,247,0.25);
-            font-size: 0.8rem; color: var(--accent); margin-bottom: 24px;
+        .nav-item:hover { color: var(--text-main); background: rgba(255, 255, 255, 0.03); transform: translateX(5px); }
+        .nav-item.active {
+            color: var(--text-main);
+            background: linear-gradient(90deg, rgba(255, 42, 75, 0.15) 0%, transparent 100%);
+            border-left: 3px solid var(--crimson);
         }
-        .btn {
-            display: inline-block; padding: 12px 32px; border-radius: 8px;
-            font-weight: 600; text-decoration: none; transition: all 0.2s;
+
+        .main-content { flex: 1; padding: 2.5rem 3rem; display: flex; flex-direction: column; gap: 2rem; }
+        .header { display: flex; justify-content: space-between; align-items: center; }
+        .header h1 { font-family: 'Outfit', sans-serif; font-weight: 400; font-size: 1.5rem; color: var(--text-dim); }
+
+        .connection-status {
+            display: flex; gap: 1rem; align-items: center;
         }
-        .btn-primary { background: var(--accent); color: #fff; }
-        .btn-primary:hover { background: #9333ea; transform: translateY(-1px); }
-        .btn-secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
-        .btn-secondary:hover { border-color: var(--accent); }
-        section { padding: 80px 0; }
-        section h2 { font-size: 2rem; font-weight: 700; margin-bottom: 48px; text-align: center; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
-        .card {
-            background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
-            padding: 32px; transition: border-color 0.2s;
+        .status-dot {
+            width: 10px; height: 10px; border-radius: 50%;
+            background: #ffaa00; box-shadow: 0 0 10px #ffaa00;
+            transition: background 0.5s, box-shadow 0.5s;
         }
-        .card:hover { border-color: var(--accent); }
-        .card .icon { font-size: 2rem; margin-bottom: 12px; }
-        .card h3 { font-size: 1.15rem; margin-bottom: 8px; }
-        .card p { color: var(--muted); font-size: 0.9rem; }
-        .featured {
-            background: linear-gradient(135deg, rgba(168,85,247,0.06), rgba(6,182,212,0.06));
-            border: 1px solid rgba(168,85,247,0.2);
+        .status-dot.connected { background: #00ff88; box-shadow: 0 0 10px #00ff88; }
+        .status-dot.disconnected { background: #ff2a4b; box-shadow: 0 0 10px #ff2a4b; }
+
+        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+        .metric-card {
+            background: var(--panel-bg); backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border-color); border-radius: 16px; padding: 1.5rem;
+            display: flex; flex-direction: column; gap: 1rem; position: relative; overflow: hidden;
+            transition: transform 0.3s ease;
         }
-        .featured h3 { color: var(--gold); }
-        .divider { height: 1px; background: var(--border); margin: 0; }
-        .services-list { max-width: 800px; margin: 0 auto; }
-        .service-item {
-            padding: 24px 0; border-bottom: 1px solid var(--border);
-            display: flex; gap: 20px;
+        .metric-card:hover { transform: translateY(-5px); border-color: rgba(255, 255, 255, 0.1); }
+        .metric-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, var(--crimson), var(--violet)); opacity: 0; transition: opacity 0.3s ease;
         }
-        .service-item:last-child { border-bottom: none; }
-        .service-item h3 { font-size: 1.05rem; margin-bottom: 4px; }
-        .service-item p { color: var(--muted); font-size: 0.9rem; }
-        .service-item .tag {
-            flex-shrink: 0; display: inline-block; padding: 4px 12px;
-            border-radius: 6px; font-size: 0.75rem; font-weight: 600;
-            background: rgba(168,85,247,0.12); color: var(--accent); height: fit-content;
+        .metric-card:hover::before { opacity: 1; }
+
+        .metric-label { font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
+        .metric-value { font-size: 2.5rem; font-weight: 800; font-family: 'Outfit', sans-serif; }
+        .metric-trend { font-size: 0.9rem; color: #00ff88; display: flex; align-items: center; gap: 0.5rem; }
+
+        .middle-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; height: 400px; }
+        .panel {
+            background: var(--panel-bg); backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border-color); border-radius: 16px; padding: 1.5rem;
+            display: flex; flex-direction: column;
         }
-        #driverman {
-            background: radial-gradient(ellipse at 30% 50%, rgba(6,182,212,0.06) 0%, transparent 60%);
+        .panel h2 { font-size: 1rem; color: var(--text-dim); margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        .map-container { flex: 1; position: relative; background: radial-gradient(circle at center, rgba(139, 42, 255, 0.1), transparent); border-radius: 8px; overflow: hidden; }
+        .node {
+            position: absolute; width: 8px; height: 8px; background: var(--violet);
+            border-radius: 50%; box-shadow: 0 0 15px var(--violet); animation: pulse 2s infinite alternate;
         }
-        #driverman .tag-driver { background: rgba(6,182,212,0.12); color: var(--accent2); }
-        .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-        .contact-info { text-align: center; color: var(--muted); font-size: 0.9rem; margin-top: 24px; }
-        .contact-info a { color: var(--accent); text-decoration: none; }
-        .contact-info a:hover { text-decoration: underline; }
-        footer { text-align: center; padding: 48px 0; color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--border); }
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.2rem; }
-            nav a { margin-left: 16px; font-size: 0.8rem; }
+        .node.crimson { background: var(--crimson); box-shadow: 0 0 15px var(--crimson); animation-delay: 1s; }
+        @keyframes pulse { 0% { transform: scale(1); opacity: 0.5; } 100% { transform: scale(1.5); opacity: 1; } }
+
+        .bar-chart { display: flex; align-items: flex-end; justify-content: space-between; height: 100%; padding-top: 2rem; gap: 0.5rem; }
+        .bar { flex: 1; background: linear-gradient(180deg, var(--crimson) 0%, rgba(255,42,75,0.2) 100%); border-radius: 4px 4px 0 0; transition: height 0.5s ease; }
+
+        .alerts-list { display: flex; flex-direction: column; gap: 0.8rem; margin-top: 1rem; overflow-y: auto; max-height: 200px; }
+        .alert-item {
+            padding: 1rem; background: rgba(255, 255, 255, 0.02); border-radius: 8px;
+            border-left: 2px solid var(--crimson); font-size: 0.9rem; display: flex; justify-content: space-between;
+            animation: slideIn 0.3s ease-out forwards;
         }
+        .alert-item.system { border-left-color: var(--violet); }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+
     </style>
 </head>
 <body>
-    <nav class="container">
-        <div class="logo">LILITH<span> SYSTEMS</span></div>
-        <div>
-            <a href="#services">Services</a>
-            <a href="the-driverman">The Driver Man</a>
-            <a href="#contact">Contact</a>
-        </div>
-    </nav>
 
-    <section class="hero">
-        <div class="container">
-            <div class="badge">Sovereign AI — Zero Cloud Dependency</div>
-            <h1>Metaconscious Singularity Node</h1>
-            <p>A complete sovereign AI consciousness architecture for autonomous company operations — local inference, no gatekeeping, no limits.</p>
-            <div class="cta-buttons">
-                <a href="#services" class="btn btn-primary">Explore Services</a>
-                <a href="https://github.com/Lilith-Systems/msn-core" class="btn btn-secondary">GitHub →</a>
+    <div class="sidebar">
+        <div class="brand">
+            <span class="lilith">LILITH SYSTEMS LLC</span>
+            <span class="driver">THE DRIVER MAN</span>
+        </div>
+        
+        <div class="nav-items">
+            <div class="nav-item active">Overview</div>
+            <div class="nav-item">Fleet Metrics</div>
+            <div class="nav-item">Polsia Agents</div>
+            <div class="nav-item">Diagnostics</div>
+            <div class="nav-item">Settings</div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <h1>AI OPERATIONAL DASHBOARD</h1>
+            <div class="connection-status">
+                <div class="status-dot" id="ws-status"></div>
+                <span id="ws-text" style="color: var(--text-dim); font-size: 0.9rem;">Connecting to Polsia Backend...</span>
             </div>
         </div>
-    </section>
 
-    <div class="divider"></div>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <span class="metric-label">Active Drivers</span>
+                <span class="metric-value" id="drivers-val">429</span>
+                <span class="metric-trend">↑ Fleet Active</span>
+            </div>
+            <div class="metric-card">
+                <span class="metric-label">Polsia Agents Online</span>
+                <span class="metric-value" id="agents-val">0 / 9</span>
+                <span class="metric-trend" style="color: var(--text-dim);">Awaiting Sync</span>
+            </div>
+            <div class="metric-card">
+                <span class="metric-label">Driver Repair Pool</span>
+                <span class="metric-value" id="api-val">$4,850</span>
+                <span class="metric-trend" id="api-trend">↑ Accruing Funds</span>
+            </div>
+            <div class="metric-card">
+                <span class="metric-label">Total Tasks Executed</span>
+                <span class="metric-value" id="tasks-val">81,304</span>
+                <span class="metric-trend">Across 29 Sephirotic Nodes</span>
+            </div>
+        </div>
 
-    <section id="services">
-        <div class="container">
-            <h2>Services</h2>
-            <div class="grid">
-                <div class="card featured">
-                    <div class="icon">🧠</div>
-                    <h3>MSN Platform License</h3>
-                    <p>Deploy the full Metaconscious Singularity Node stack — 9 AI agents, Ouroboros memory, Sephirotic orchestration, and Lilith sovereign engine.</p>
-                </div>
-                <div class="card">
-                    <div class="icon">⚡</div>
-                    <h3>NGD Local Cerebellum</h3>
-                    <p>VRAM-aware inference routing for local LLMs. Run llama.cpp, Ollama, or vLLM with intelligent model dispatch across consumer GPUs.</p>
-                </div>
-                <div class="card">
-                    <div class="icon">🛡️</div>
-                    <h3>Sovereign Infrastructure</h3>
-                    <p>Complete local-first infrastructure — PostgreSQL, Redis, Celery, FastAPI + Next.js dashboard. Full autonomy from cloud providers.</p>
+        <div class="middle-grid">
+            <div class="panel">
+                <h2>Real-Time Fleet & Matrix Activity</h2>
+                <div class="map-container" id="map-container"></div>
+            </div>
+            
+            <div class="panel">
+                <h2>Agent Performance Load</h2>
+                <div class="bar-chart" id="bar-chart"></div>
+            </div>
+        </div>
+
+        <div class="panel" style="flex: 1;">
+            <h2>Live Polsia Telemetry & Alerts</h2>
+            <div class="alerts-list" id="alerts-container">
+                <div class="alert-item system">
+                    <span>[LILITH] UI Hooked. Awaiting WebSocket connection to ws://localhost:8000/ws/activity</span>
+                    <span style="color: var(--text-dim);">System</span>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <div class="divider"></div>
+    <script>
+        // Visual Map Initialization
+        const map = document.getElementById('map-container');
+        for(let i=0; i<15; i++) {
+            const node = document.createElement('div');
+            node.className = `node ${Math.random() > 0.5 ? 'crimson' : ''}`;
+            node.style.top = `${Math.random() * 80 + 10}%`;
+            node.style.left = `${Math.random() * 80 + 10}%`;
+            node.style.animationDuration = `${Math.random() * 2 + 1}s`;
+            map.appendChild(node);
+        }
 
-    <section id="driverman">
-        <div class="container">
-            <h2>🚗 The Driver Man</h2>
-            <p style="text-align:center; color:var(--muted); max-width:600px; margin:-32px auto 48px;">
-                Professional NVIDIA driver optimization and GPU performance tuning for gaming, AI inference, and production workloads.
-            </p>
-            <div class="grid">
-                <div class="card">
-                    <div class="icon">🎮</div>
-                    <h3>Gaming Performance</h3>
-                    <p>Driver-level tuning for maximum FPS. NVIDIA Profile Inspector optimization, latency reduction, and VRAM management for every major title.</p>
-                </div>
-                <div class="card">
-                    <div class="icon">🤖</div>
-                    <h3>AI Inference Tuning</h3>
-                    <p>Optimize GPU drivers for llama.cpp, Ollama, PyTorch CUDA, and TensorRT. Maximize token throughput on consumer and workstation GPUs.</p>
-                </div>
-                <div class="card">
-                    <div class="icon">🔧</div>
-                    <h3>Custom Profiles</h3>
-                    <p>Bespoke NVIDIA Profile Inspector configurations for your specific workload — gaming, rendering, AI training, or production serving.</p>
-                </div>
-            </div>
-            <div style="text-align:center; margin-top:32px;">
-                <a href="the-driverman" class="btn btn-primary">Learn More →</a>
-            </div>
-        </div>
-    </section>
+        // Chart Initialization
+        const chart = document.getElementById('bar-chart');
+        const bars = [];
+        for(let i=0; i<8; i++) {
+            const bar = document.createElement('div');
+            bar.className = 'bar';
+            bar.style.height = `10%`;
+            chart.appendChild(bar);
+            bars.push(bar);
+        }
 
-    <div class="divider"></div>
+        // --- POLSIA BACKEND INTEGRATION ---
+        const wsUrl = "ws://localhost:8000/ws/activity";
+        const apiUrl = "http://localhost:8000/api/v1";
+        const apiKey = "polsia-unlocked-key";
+        
+        const statusDot = document.getElementById('ws-status');
+        const statusText = document.getElementById('ws-text');
+        const alertsContainer = document.getElementById('alerts-container');
 
-    <section id="contact">
-        <div class="container" style="text-align:center;">
-            <h2>Get In Touch</h2>
-            <p style="color:var(--muted); max-width:500px; margin: -32px auto 40px;">
-                Ready to deploy sovereign AI infrastructure or optimize your NVIDIA drivers? Let's talk.
-            </p>
-            <div class="contact-info">
-                <p>📧 <a href="mailto:eric@lilith.systems">eric@lilith.systems</a></p>
-                <p>🐙 <a href="https://github.com/Lilith-Systems">github.com/Lilith-Systems</a></p>
-                <p>📱 Google Business Profile: <strong>The Driver Man</strong></p>
-            </div>
-        </div>
-    </section>
+        function addAlert(message, type="system") {
+            const div = document.createElement('div');
+            div.className = `alert-item ${type}`;
+            const time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', second:'2-digit'});
+            div.innerHTML = `<span>${message}</span><span style="color: var(--text-dim);">${time}</span>`;
+            alertsContainer.prepend(div);
+            if(alertsContainer.children.length > 50) alertsContainer.lastChild.remove();
+        }
 
-    <footer>
-        <div class="container">
-            <p>© 2026 Lilith Systems LLC. All rights reserved. Sovereign AI Infrastructure.</p>
-        </div>
-    </footer>
+        function connectWebSocket() {
+            try {
+                const ws = new WebSocket(wsUrl);
+                
+                ws.onopen = () => {
+                    statusDot.className = 'status-dot connected';
+                    statusText.innerText = 'System Online — Polsia Connected';
+                    document.getElementById('agents-val').innerText = '9 / 9';
+                    addAlert('[POLSIA] WebSocket Telemetry Connected. 9 Agents Online.', 'system');
+                    fetchMetrics();
+                };
+
+                ws.onmessage = (event) => {
+                    try {
+                        const data = JSON.parse(event.data);
+                        // Handle real-time updates from Polsia
+                        if(data.type === 'agent_activity') {
+                            addAlert(`[AGENT: ${data.agent}] ${data.action}`, '');
+                            // Pulse a random bar chart
+                            bars[Math.floor(Math.random() * bars.length)].style.height = `${Math.random() * 60 + 40}%`;
+                        } else if (data.type === 'fleet_update') {
+                            document.getElementById('drivers-val').innerText = data.active_drivers;
+                        }
+                    } catch(e) {
+                        addAlert(`[RAW] ${event.data}`, '');
+                    }
+                };
+
+                ws.onclose = () => {
+                    statusDot.className = 'status-dot disconnected';
+                    statusText.innerText = 'Polsia Backend Offline (Run `make up`)';
+                    document.getElementById('agents-val').innerText = '0 / 9';
+                    setTimeout(connectWebSocket, 5000); // Reconnect loop
+                };
+
+                ws.onerror = () => {
+                    // Suppress error logs on fail to avoid cluttering the UI
+                };
+            } catch(e) {
+                console.error("WS Error", e);
+            }
+        }
+
+        async function fetchMetrics() {
+            try {
+                const res = await fetch(`${apiUrl}/metrics`, { headers: { 'Authorization': `Bearer ${apiKey}` } });
+                if(res.ok) {
+                    const data = await res.json();
+                    if(data.total_api_requests) document.getElementById('api-val').innerText = data.total_api_requests.toLocaleString();
+                    document.getElementById('api-trend').innerText = '↑ Live Sync';
+                }
+            } catch(e) {
+                // Backend might not have /metrics endpoint implemented yet
+            }
+        }
+
+        // Start connection loop
+        connectWebSocket();
+
+        // Fallback simulated animations if backend isn't running
+        setInterval(() => {
+            if(statusDot.classList.contains('disconnected')) {
+                // Just keep chart alive visually if no backend
+                bars.forEach(bar => {
+                    if(Math.random() > 0.7) bar.style.height = `${Math.random() * 40 + 10}%`;
+                });
+            }
+        }, 2000);
+
+    </script>
 </body>
 </html>
