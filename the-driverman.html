@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Driver Man — NVIDIA Driver Optimization</title>
+    <meta name="description" content="The Driver Man — professional NVIDIA driver optimization, GPU performance tuning, and custom profiles for gaming, AI inference, and production workloads.">
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --surface: #12121a;
+            --border: #1e1e2e;
+            --text: #e4e4ec;
+            --muted: #8888a0;
+            --cyan: #06b6d4;
+            --cyan-dim: rgba(6,182,212,0.08);
+            --green: #10b981;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg); color: var(--text); line-height: 1.6;
+        }
+        .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 0; border-bottom: 1px solid var(--border);
+        }
+        nav .logo { font-size: 1.2rem; font-weight: 700; }
+        nav .logo span { color: var(--cyan); }
+        nav a { color: var(--muted); text-decoration: none; margin-left: 20px; font-size: 0.9rem; }
+        nav a:hover { color: var(--text); }
+        .hero {
+            text-align: center; padding: 80px 0 60px;
+            background: radial-gradient(ellipse at 50% 0%, rgba(6,182,212,0.06) 0%, transparent 60%);
+        }
+        .hero h1 { font-size: 2.8rem; font-weight: 800; color: var(--cyan); margin-bottom: 12px; }
+        .hero p { color: var(--muted); font-size: 1.1rem; max-width: 560px; margin: 0 auto; }
+        section { padding: 60px 0; }
+        section h2 { font-size: 1.5rem; margin-bottom: 24px; color: var(--cyan); }
+        .offer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+        .offer-card {
+            background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+            padding: 24px; text-align: center;
+        }
+        .offer-card .icon { font-size: 1.8rem; margin-bottom: 8px; }
+        .offer-card h3 { font-size: 1rem; margin-bottom: 6px; }
+        .offer-card p { color: var(--muted); font-size: 0.85rem; }
+        .offer-card .price { color: var(--green); font-weight: 700; font-size: 1.1rem; margin-top: 12px; }
+        .service-list { list-style: none; }
+        .service-list li {
+            padding: 12px 0; border-bottom: 1px solid var(--border);
+            display: flex; gap: 12px; align-items: flex-start;
+        }
+        .service-list li::before { content: "✓"; color: var(--green); font-weight: 700; }
+        .cta {
+            text-align: center; padding: 60px 0;
+            background: radial-gradient(ellipse at 50% 50%, rgba(6,182,212,0.04) 0%, transparent 60%);
+        }
+        .btn {
+            display: inline-block; padding: 12px 32px; border-radius: 8px;
+            font-weight: 600; text-decoration: none; transition: all 0.2s;
+            background: var(--cyan); color: #000; margin: 8px;
+        }
+        .btn:hover { background: #22d3ee; transform: translateY(-1px); }
+        .btn-outline { background: transparent; color: var(--cyan); border: 1px solid var(--cyan); }
+        .btn-outline:hover { background: var(--cyan-dim); }
+        .contact-block { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 32px; text-align: center; }
+        .contact-block a { color: var(--cyan); text-decoration: none; }
+        .contact-block a:hover { text-decoration: underline; }
+        footer { text-align: center; padding: 40px 0; color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--border); }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="container">
+        <div class="logo">THE DRIVER <span>MAN</span></div>
+        <div>
+            <a href="#services">Services</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#contact">Contact</a>
+            <a href="/">Lilith Systems →</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <h1>NVIDIA Driver Optimization</h1>
+            <p>Professional GPU performance tuning — maximize FPS, reduce latency, and unlock the full potential of your NVIDIA hardware.</p>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="container">
+            <h2>What I Do</h2>
+            <ul class="service-list">
+                <li><strong>NV Profile Inspector Configuration</strong> — Custom driver profiles for any game or workload. Texture filtering, power management, shader cache tuning.</li>
+                <li><strong>AI Inference Optimization</strong> — CUDA stream configuration, TensorRT engine tuning, VRAM allocation for llama.cpp / Ollama / PyTorch.</li>
+                <li><strong>Latency Reduction</strong> — NVIDIA Reflex optimization, low-latency mode tuning, GPU scheduling, interrupt moderation.</li>
+                <li><strong>VRAM Management</strong> — Texture streaming budgets, render pool optimization, multi-GPU memory balancing.</li>
+                <li><strong>Game-Specific Profiles</strong> — Per-title optimization for Cyberpunk 2077, Call of Duty, Fortnite, Apex Legends, and any UE5/Unity title.</li>
+                <li><strong>Driver Version Consultation</strong> — Which Game Ready or Studio driver maximizes your specific workload. Rollback, DDU clean install, and stability testing.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="pricing">
+        <div class="container">
+            <h2>Pricing</h2>
+            <div class="offer-grid">
+                <div class="offer-card">
+                    <div class="icon">🎯</div>
+                    <h3>Single Profile</h3>
+                    <p>One custom NVIDIA profile for your game or workload. NV Inspector config + optimization report.</p>
+                    <div class="price">$25</div>
+                </div>
+                <div class="offer-card">
+                    <div class="icon">🚀</div>
+                    <h3>Gaming Bundle</h3>
+                    <p>5 game-specific profiles + global system optimization + latency tuning.</p>
+                    <div class="price">$75</div>
+                </div>
+                <div class="offer-card">
+                    <div class="icon">⚡</div>
+                    <h3>AI Inference Tune</h3>
+                    <p>Full driver stack optimized for local AI inference. CUDA/TensorRT/llama.cpp profile + VRAM tuning.</p>
+                    <div class="price">$100</div>
+                </div>
+                <div class="offer-card">
+                    <div class="icon">🏢</div>
+                    <h3>Enterprise</h3>
+                    <p>Bulk profiles for your org. GPU fleet configuration, production inference tuning, SLI/NVLink.</p>
+                    <div class="price">Custom</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta" id="contact">
+        <div class="container">
+            <div class="contact-block">
+                <h2>Ready to optimize?</h2>
+                <p style="color:var(--muted); margin: 12px 0 24px;">Email me with your GPU model, workload, and current driver version.</p>
+                <p style="font-size: 1.2rem; margin-bottom: 16px;">
+                    📧 <a href="mailto:eric@lilith.systems">eric@lilith.systems</a>
+                </p>
+                <a href="mailto:eric@lilith.systems?subject=Driver%20Optimization%20Request" class="btn">Get Started</a>
+                <a href="/" class="btn btn-outline">Lilith Systems LLC</a>
+                <p style="margin-top: 16px; color: var(--muted); font-size: 0.85rem;">
+                    Or find me on Google Business Profile — <strong>The Driver Man</strong>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 The Driver Man — A Lilith Systems LLC Brand. NVIDIA is a registered trademark of NVIDIA Corporation.</p>
+    </footer>
+</body>
+</html>
