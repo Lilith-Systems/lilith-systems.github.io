@@ -1,6 +1,6 @@
 {
   "schema": "lilith.quantum_skillset_desktop.v1",
-  "deployed_at": "2026-06-21T13:03:58.044170+00:00",
+  "deployed_at": "2026-06-21T13:06:54.613638+00:00",
   "staging_root": "/dev/shm/ai_staging/quantum_skillset",
   "vram_manifest": "/dev/shm/ai_staging/vram_manifest.json",
   "heart": {
@@ -159,7 +159,7 @@
         "Evaluate",
         "Loop"
       ],
-      "staged_at": "2026-06-21T13:03:51.259278+00:00"
+      "staged_at": "2026-06-21T13:06:48.597575+00:00"
     }
   },
   "github": {
