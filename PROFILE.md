@@ -3,10 +3,9 @@
 
 **Entity Type:** Limited Liability Company (Filing Pending — WA State)
 **Founder:** Eric Matthew Hill
-**Address:** 8878 Peavey Rd Unit 24, Sedro Woolley, WA 98284
-**Email:** ericmathewhill@gmail.com
+**Address:** PO Box 1234, Sedro Woolley, WA 98284
+**Email:** eric@lilith-systems.com
 **GitHub:** https://github.com/Lilith-Systems
-**Local API:** http://localhost:3210
 **Founded:** 2026
 
 ---
@@ -114,12 +113,12 @@ AI sovereignty architecture for businesses that want to run their own intelligen
 |-------|-----------|
 | AI Orchestration | MSN (10 Sephirotic agents), Ollama, grok-msn |
 | Backend | Node.js (Lilith API), Python FastAPI (Driver Man) |
-| Database | SQLite WAL-mode (golem_diary.db) |
+| Database | SQLite WAL-mode |
 | Memory | Ouroboros WAL engrams, bidirectional memory index |
 | Shell | Fish + custom msn/lilith/grok CLI commands |
-| Deployment | systemd --user services (lilith-api, lilith-desktop, ngd-cerebellum) |
+| Deployment | systemd user services |
 | Security | SHA-256 tx hashing, parameterized SQL, OOM guards, thread locks |
-| Monitoring | ngd_monitor.sh watchdog, WebSocket telemetry |
+| Monitoring | WebSocket telemetry |
 
 ---
 
@@ -143,9 +142,9 @@ AI sovereignty architecture for businesses that want to run their own intelligen
 
 **Eric Matthew Hill**
 Founder & Principal Engineer, Lilith Systems LLC
-8878 Peavey Rd Unit 24
+PO Box 1234
 Sedro Woolley, WA 98284
-ericmathewhill@gmail.com
+eric@lilith-systems.com
 
 *AI Orchestration by Lilith MSN | Sovereign Infrastructure Stack*
 *Last Updated: 2026-06-20*
