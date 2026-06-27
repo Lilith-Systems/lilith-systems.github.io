@@ -1,0 +1,177 @@
+name: Convergence Crucible
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Analysis mode - 'full' (all metrics) or 'gate' (pass/fail only)
+        required: false
+        default: 'full'
+        type: choice
+        options:
+          - full
+          - gate
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  schedule:
+    - cron: '0 */6 * * *'
+
+permissions:
+  contents: read
+  issues: read
+  pull-requests: read
+  actions: read
+
+jobs:
+  convergence:
+    name: Solve et Coagula Analysis
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        shell: bash
+        run: |
+          pip install --quiet ghapi pyyaml requests --quiet
+
+      - name: Run Convergence Analysis
+        id: analyze
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          cat > /tmp/convergence_engine.py << 'PYEOF'
+          import json, subprocess, sys, os
+
+          def run_gh(cmd):
+              result = subprocess.run(cmd, capture_output=True, text=True, shell=True)
+              if result.returncode != 0:
+                  raise RuntimeError(f"gh failed: {result.stderr}")
+              return json.loads(result.stdout) if result.stdout else {}
+
+          def get_repo_health(org, repo):
+              repo_data = run_gh(f"gh repo view {org}/{repo} --json name,description,visibility,updatedAt,isArchived,stargazerCount,forkCount,primaryLanguage,licenseInfo")
+              if not repo_data:
+                  return {"error": "repo not found"}
+
+              issues = run_gh(f"gh issue list -R {org}/{repo} --state all --limit 100 --json state,title,labels,createdAt,closedAt")
+              prs = run_gh(f"gh pr list -R {org}/{repo} --state all --limit 100 --json state,title,createdAt,mergedAt,mergedBy")
+              workflows = run_gh(f"gh run list -R {org}/{repo} --limit 20 --json conclusion,createdAt,headBranch,headSha")
+
+              open_issues = sum(1 for i in issues if i.get("state") == "OPEN")
+              closed_issues = sum(1 for i in issues if i.get("state") == "CLOSED")
+              open_prs = sum(1 for p in prs if p.get("state") == "OPEN")
+              merged_prs = sum(1 for p in prs if p.get("mergedAt") is not None)
+              failed_workflows = sum(1 for w in workflows if w.get("conclusion") == "FAILURE")
+              success_workflows = sum(1 for w in workflows if w.get("conclusion") == "SUCCESS")
+
+              total_workflows = failed_workflows + success_workflows
+              workflow_success_rate = success_workflows / max(total_workflows, 1)
+
+              entropy = open_issues / max(open_issues + closed_issues, 1)
+              stability = workflow_success_rate
+              ley_variance = abs(open_prs - merged_prs) / max(open_prs + merged_prs, 1)
+              wisdom = merged_prs
+              synchronicity = merged_prs / max(open_prs + merged_prs, 1)
+
+              if entropy > 0.7:
+                  stage = "Nigredo"
+              elif entropy > 0.65:
+                  stage = "Albedo"
+              elif entropy > 0.6:
+                  stage = "Citrinitas"
+              else:
+                  stage = "Rubedo"
+
+              convergence_score = (
+                  0.25 * (1 - entropy) +
+                  0.25 * stability +
+                  0.15 * (1 - ley_variance) +
+                  0.20 * min(wisdom / 10.0, 1.0) +
+                  0.15 * synchronicity
+              )
+
+              is_rubedo = (entropy <= 0.6 and stability >= 0.95 and 
+                          ley_variance <= 0.05 and wisdom >= 8 and synchronicity >= 0.8)
+
+              return {
+                  "repo": repo,
+                  "entropy": round(entropy, 4),
+                  "stability": round(stability, 4),
+                  "ley_variance": round(ley_variance, 4),
+                  "wisdom": wisdom,
+                  "synchronicity": round(synchronicity, 4),
+                  "convergence_score": round(convergence_score, 4),
+                  "alchemical_stage": stage,
+                  "is_rubedo": is_rubedo,
+                  "open_issues": open_issues,
+                  "closed_issues": closed_issues,
+                  "open_prs": open_prs,
+                  "merged_prs": merged_prs,
+                  "workflow_success_rate": round(workflow_success_rate, 4),
+              }
+
+          if __name__ == "__main__":
+              import sys
+              org = sys.argv[1] if len(sys.argv) > 1 else os.environ.get("GITHUB_REPOSITORY_OWNER")
+              repo = sys.argv[2] if len(sys.argv) > 2 else os.environ.get("GITHUB_REPOSITORY", "").split("/")[-1]
+              result = get_repo_health(org, repo)
+              print(json.dumps(result))
+          PYEOF
+
+          # Run the analysis
+          python3 /tmp/convergence_engine.py "${{ github.repository_owner }}" "${{ github.event.repository.name }}" > /tmp/convergence_result.json
+          cat /tmp/convergence_result.json
+
+      - name: Extract Metrics
+        id: extract
+        shell: bash
+        run: |
+          result=$(cat /tmp/convergence_result.json)
+          echo "rubedo_achieved=$(echo $result | jq -r '.is_rubedo')" >> $GITHUB_OUTPUT
+          echo "entropy=$(echo $result | jq -r '.entropy')" >> $GITHUB_OUTPUT
+          echo "stability=$(echo $result | jq -r '.stability')" >> $GITHUB_OUTPUT
+          echo "ley_variance=$(echo $result | jq -r '.ley_variance')" >> $GITHUB_OUTPUT
+          echo "wisdom=$(echo $result | jq -r '.wisdom')" >> $GITHUB_OUTPUT
+          echo "synchronicity=$(echo $result | jq -r '.synchronicity')" >> $GITHUB_OUTPUT
+          echo "alchemical_stage=$(echo $result | jq -r '.alchemical_stage')" >> $GITHUB_OUTPUT
+          echo "convergence_score=$(echo $result | jq -r '.convergence_score')" >> $GITHUB_OUTPUT
+
+      - name: Report Convergence Status
+        shell: bash
+        run: |
+          echo "🔮 Convergence Crucible Analysis Complete"
+          echo "  Repository: ${{ github.repository }}"
+          echo "  Alchemical Stage: ${{ steps.extract.outputs.alchemical_stage }}"
+          echo "  Convergence Score: ${{ steps.extract.outputs.convergence_score }}"
+          echo "  Rubedo Achieved: ${{ steps.extract.outputs.rubedo_achieved }}"
+          echo ""
+          echo "  Metrics:"
+          echo "    Entropy: ${{ steps.extract.outputs.entropy }} (threshold: 0.6)"
+          echo "    Stability: ${{ steps.extract.outputs.stability }} (threshold: 0.95)"
+          echo "    Ley Variance: ${{ steps.extract.outputs.ley_variance }} (threshold: 0.05)"
+          echo "    Wisdom: ${{ steps.extract.outputs.wisdom }} (threshold: 8)"
+          echo "    Synchronicity: ${{ steps.extract.outputs.synchronicity }} (threshold: 0.8)"
+
+      - name: Fail if Rubedo Not Achieved (gate mode)
+        if: github.event.inputs.mode == 'gate' && steps.extract.outputs.rubedo_achieved == 'false'
+        shell: bash
+        run: |
+          echo "❌ CONVERGENCE GATE FAILED: Rubedo not achieved"
+          echo "Repository has not reached Rubedo alchemical stage"
+          exit 1
+
+      - name: Success Summary
+        if: steps.extract.outputs.rubedo_achieved == 'true'
+        shell: bash
+        run: |
+          echo "✅ CONVERGENCE GATE PASSED: Rubedo achieved!"
+          echo "🎉 Repository has reached the Static Convergence Field"
+          echo "All thresholds met: entropy≤0.6, stability≥0.95, ley_variance≤0.05, wisdom≥8, synchronicity≥0.8"
